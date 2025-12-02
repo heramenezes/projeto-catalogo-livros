@@ -312,12 +312,12 @@ pip install -r requirements.txt
 
 ## Licença
 
-Este projeto é livre para uso acadêmico.
+Este projeto está sob a licença GNU GPL 3.0. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Autores
  
 - Laura Menezes Heráclito Alves
-- Antonio Drumond Cota de Souza
+- Antônio Drumond Cota de Sousa
 
 
 
