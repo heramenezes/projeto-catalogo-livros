@@ -1,0 +1,50 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Database
+database/livros.db
+database/*.db
+database/*.db-journal
+
+# JMeter Results
+tests/jmeter/resultados.jtl
+tests/jmeter/relatorio-html/
+tests/jmeter/*.log
+tests/jmeter/*.jtl
+
+# Python
+tests/analysis/analise-graficos/
+tests/analysis/__pycache__/
+tests/analysis/*.pyc
+tests/analysis/.pytest_cache/
+*.py[cod]
+*$py.class
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.temp

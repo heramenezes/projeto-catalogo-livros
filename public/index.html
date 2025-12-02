@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Livros</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Catálogo de Livros</h1>
+            <p class="subtitle">Gerencie sua biblioteca pessoal</p>
+        </header>
+
+        <div class="stats-grid" id="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalLivros">-</div>
+                <div class="stat-label">Total de Livros</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalFavoritos">-</div>
+                <div class="stat-label">Favoritos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="mediaAvaliacao">-</div>
+                <div class="stat-label">Média de Avaliação</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>Livros por Gênero</h3>
+                <canvas id="generoChart"></canvas>
+            </div>
+        </div>
+
+        <div class="filters-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar por título ou autor...">
+                <button onclick="buscar()" class="btn btn-primary">Buscar</button>
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="favoritos">Favoritos</button>
+                <button class="filter-btn" data-filter="5">
+                    5 estrelas
+                    <span class="stars-badge">★★★★★</span>
+                </button>
+                <button class="filter-btn" data-filter="4">
+                    4 estrelas
+                    <span class="stars-badge">★★★★</span>
+                </button>
+                <button class="filter-btn" data-filter="3">
+                    3 estrelas
+                    <span class="stars-badge">★★★</span>
+                </button>
+            </div>
+
+            <div class="controls-bar">
+                <div class="sort-selector">
+                    <label for="sortSelect">Ordenar por:</label>
+                    <select id="sortSelect" onchange="carregarLivros()">
+                        <option value="">Mais recentes</option>
+                        <option value="titulo-asc">Título (A-Z)</option>
+                        <option value="titulo-desc">Título (Z-A)</option>
+                        <option value="autor-asc">Autor (A-Z)</option>
+                        <option value="autor-desc">Autor (Z-A)</option>
+                        <option value="avaliacao-desc">Maior avaliação</option>
+                        <option value="avaliacao-asc">Menor avaliação</option>
+                    </select>
+                </div>
+
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid" title="Visualização em grade">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <rect x="2" y="2" width="7" height="7" rx="1"/>
+                            <rect x="11" y="2" width="7" height="7" rx="1"/>
+                            <rect x="2" y="11" width="7" height="7" rx="1"/>
+                            <rect x="11" y="11" width="7" height="7" rx="1"/>
+                        </svg>
+                    </button>
+                    <button class="view-btn" data-view="list" title="Visualização em lista">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <rect x="2" y="3" width="16" height="3" rx="1"/>
+                            <rect x="2" y="8.5" width="16" height="3" rx="1"/>
+                            <rect x="2" y="14" width="16" height="3" rx="1"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="advanced-filters">
+                <input type="number" id="yearFilter" placeholder="Filtrar por ano" min="1900" max="2024">
+                <input type="text" id="genreFilter" placeholder="Filtrar por gênero">
+                <button onclick="aplicarFiltrosAvancados()" class="btn btn-secondary">Aplicar Filtros</button>
+                <button onclick="limparFiltros()" class="btn btn-outline">Limpar</button>
+            </div>
+        </div>
+
+        <div class="action-bar">
+            <button onclick="window.location.href='book.html'" class="btn btn-primary">
+                Adicionar Novo Livro
+            </button>
+        </div>
+
+        <div class="books-grid" id="booksContainer">
+            <!-- Livros serão carregados aqui -->
+        </div>
+
+        <div class="pagination" id="pagination">
+            <!-- Paginação será gerada aqui -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
