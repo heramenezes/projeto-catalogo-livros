@@ -127,6 +127,4 @@ Para melhorar a documentação:
 3. Adicione exemplos práticos
 4. Atualize referências
 
----
 
-**Dica:** Mantenha esta documentação atualizada conforme o projeto evolui.
