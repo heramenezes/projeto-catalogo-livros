@@ -47,12 +47,22 @@ projeto-laura-antonio/
 
 ```
 
-## Pré-requisitos
+## ⚠️ Requisitos de Sistema
 
-- Node.js 14+ e npm
-- Python 3.8+ (para análise de resultados)
-- Apache JMeter 5.6+ (para testes de carga)
-- Java JDK 8+ (necessário para JMeter)
+**Este projeto foi desenvolvido e testado apenas para Windows.**
+
+### Pré-requisitos
+
+- **Sistema Operacional:** Windows 10/11
+- **Node.js** 14+ e npm
+- **Apache JMeter** 5.6.3 instalado em `C:\Users\SEU_USUARIO\JMeter\`
+- **Java JDK** 8+ (necessário para JMeter)
+- **Python** 3.8+ (opcional, para análise avançada de resultados)
+
+### ❌ Limitações Conhecidas
+
+- **Linux/Mac:** Os scripts de automação de testes foram desenvolvidos para Windows PowerShell e não foram testados em outros sistemas operacionais
+- Para executar em Linux/Mac, será necessário adaptar manualmente os scripts ou usar a interface gráfica do JMeter
 
 ## Instalação
 
@@ -70,23 +80,40 @@ pip install -r requirements.txt
 cd ../..
 ```
 
-## Execução
+## 🚀 Como Executar o Projeto
 
-### Iniciar o Servidor
+### Passo 1: Clonar o Repositório
 
-```bash
+```powershell
+git clone https://github.com/heramenezes/projeto-catalogo-livros.git
+cd projeto-catalogo-livros
+```
+
+### Passo 2: Instalar Dependências
+
+```powershell
+npm install
+```
+
+### Passo 3: Popular o Banco de Dados (primeira execução)
+
+```powershell
+npm run seed
+```
+
+Isso criará 10 livros de exemplo no banco de dados.
+
+### Passo 4: Iniciar o Servidor
+
+**Abra um terminal PowerShell e execute:**
+
+```powershell
 npm start
 ```
 
 O servidor estará disponível em: http://localhost:3000
 
-### Popular o Banco de Dados (primeira execução)
-
-```bash
-npm run seed
-```
-
-Isso criará 10 livros de exemplo no banco de dados.
+**⚠️ IMPORTANTE:** Mantenha este terminal aberto com o servidor rodando durante toda a execução dos testes!
 
 ## Funcionalidades
 
@@ -115,41 +142,72 @@ Isso criará 10 livros de exemplo no banco de dados.
 - Gráficos estatísticos (Chart.js)
 - Paginação
 
-## Testes de Carga
+## 🧪 Executar Testes de Carga
+
+### Pré-requisito: Servidor Deve Estar Rodando!
+
+**Antes de executar os testes, certifique-se que o servidor está rodando (Passo 4 acima).**
+
+### Método 1: Executar Testes com Script (Recomendado)
+
+**Abra um NOVO terminal PowerShell (diferente do servidor) e execute:**
+
+```powershell
+cd tests\jmeter
+.\executar-teste.ps1
+```
+
+O script irá:
+1. Limpar resultados anteriores
+2. Executar 8 cenários de teste (leva 2-3 minutos)
+3. Gerar relatório HTML automaticamente
+4. Abrir o relatório no navegador
+
+### Método 2: Executar Testes Manualmente
+
+**Se o script não funcionar, execute manualmente:**
+
+```powershell
+cd tests\jmeter
+Remove-Item -Recurse -Force relatorio-html -ErrorAction SilentlyContinue
+Remove-Item -Force resultados.jtl -ErrorAction SilentlyContinue
+& "$env:USERPROFILE\JMeter\apache-jmeter-5.6.3\bin\jmeter.bat" -n -t teste-carga.jmx -l resultados.jtl -e -o relatorio-html
+```
+
+Após a conclusão, abra o relatório:
+
+```powershell
+Start-Process "relatorio-html\index.html"
+```
 
 ### Tipos de Teste Configurados
 
-1. **Carga Espersa** - 20 usuários, carga constante
-2. **Rajada** - 100 usuários em 2 segundos
-3. **Estresse** - 50 usuários com carga crescente
-4. **Baseline** - 5 usuários (referência)
-5. **Volume** - 10 usuários, 100 requisições cada
+1. **Carga Espersa** - 20 usuários, carga constante (10s ramp-up)
+2. **Rajada** - 100 usuários em 2 segundos (teste de pico)
+3. **Estresse** - 50 usuários com carga crescente (30s ramp-up)
+4. **Baseline** - 5 usuários (referência de performance)
+5. **Volume** - 10 usuários × 100 requisições cada
 6. **Escalabilidade Fase 1** - 10 usuários
-7. **Escalabilidade Fase 2** - 30 usuários
-8. **Escalabilidade Fase 3** - 60 usuários
+7. **Escalabilidade Fase 2** - 30 usuários (3x)
+8. **Escalabilidade Fase 3** - 60 usuários (6x)
 
-### Executar Testes
+### 📊 Visualizar Resultados
 
-**Windows:**
+Os resultados são gerados em:
+- **Relatório HTML:** `tests/jmeter/relatorio-html/index.html` (dashboard interativo)
+- **Dados brutos:** `tests/jmeter/resultados.jtl` (formato CSV)
+
+### 📈 Análise Avançada com Python (Opcional)
+
+Para gerar gráficos adicionais:
+
 ```powershell
-powershell -ExecutionPolicy Bypass -File tests/jmeter/executar-teste.ps1
-```
-
-**Linux:**
-```bash
-cd tests/jmeter
-chmod +x executar-teste.sh
-./executar-teste.sh
-```
-
-### Analisar Resultados com Python
-
-```bash
-cd tests/analysis
+cd tests\analysis
+pip install -r requirements.txt
 python analisar-resultados.py
 ```
 
-Gera 8 gráficos profissionais em alta resolução (300 DPI) e um relatório textual detalhado.
+Gera 8 gráficos profissionais em alta resolução (300 DPI) na pasta `analise-graficos/`.
 
 ## Documentação Completa
 
