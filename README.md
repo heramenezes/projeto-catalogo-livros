@@ -251,30 +251,16 @@ cd tests/analysis
 pip install -r requirements.txt
 ```
 
-## Contribuindo
-
-1. Faça fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
 
 ## Licença
 
 Este projeto é livre para uso acadêmico.
 
 ## Autores
+ 
+- Laura Menezes Heráclito Alves
+- Antonio Drumond Cota de Souza
 
-- Laura
-- Antonio
 
-## Agradecimentos
-
-- Professores da PUC
-- Documentação do JMeter
-- Comunidade Node.js
-- Seaborn e Matplotlib
-
----
 
 **Nota:** Para informações detalhadas sobre cada componente, consulte a documentação específica na pasta `docs/`.
